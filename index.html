@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+
+<head>
+    <title>First Angular</title>
+    <script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="scripts/application.js"></script>
+    <script type="text/javascript" src="scripts/Controller/MainController.js"></script>
+    <style>
+        td {
+            padding: 5px;
+            margin: 5px;
+        }
+        
+        body {
+            font-family: arial;
+        }
+
+        
+        th {
+            border-bottom: 1px solid lightblue;
+            margin: 4px;
+            padding: 4px;
+        }
+        
+        .hide {
+            visibility: hidden;
+            height: 1px;
+        }
+        
+        .unhide {
+            visibility: visible;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body ng-controller="MainController">
+    <h2>Controller 1: {{nameItem}}</h2>
+    <div>
+        <form name="searchUser" ng-submit="search(username)">
+            <input type="search" placeholder="UserID to find" required ng-model="username">
+            <input type="submit" value="Search">
+        </form>
+        <p>Searching for user: {{username}}</p>
+    </div>
+    <div class="{{errorClass}}">
+        <table style="width: 100%">
+            <thead>
+                <th>Key</th>
+                <th style="width: 75%;">Value</th>
+            </thead>
+            <tr>
+                <td>login</td>
+                <td>{{person.login}}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{person.name}}</td>
+            </tr>
+            <tr>
+                <td>Company</td>
+                <td><strong>{{person.company}}<strong></td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{person.location}}</td>
+            </tr>
+            <tr>
+                <td>ImageUrl</td>
+                <td><img ng-src="{{person.avatar_url}}" style="height: 80px; width: 80px;" title="{{person.name}} ({{person.company}})"></td>
+            </tr>
+        </table>
+        <input type="search" ng-model="txtFilter">
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Stars</th>
+                <th>Language</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="repo in repos | orderBy:'-stargazers_count' | filter:txtFilter">
+                    <td>{{repo.name}}</td>
+                    <td style="text-align: right;">{{repo.stargazers_count | number}}</td>
+                    <td>{{repo.language}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div ng-controller="SecondController" class="{{secondCss}}">
+            <h2>{{error}}</h2>
+        </div>
+    </body>
+</html>
