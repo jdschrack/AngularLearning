@@ -1,0 +1,45 @@
+<div class="{{errorClass}}">
+    <table style="width: 100%">
+        <thead>
+            <th>Key</th>
+            <th style="width: 75%;">Value</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>login</td>
+                <td>{{person.login}}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{person.name}}</td>
+            </tr>
+            <tr>
+                <td>Company</td>
+                <td><strong>{{person.company}}</strong></td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{person.location}}</td>
+            </tr>
+            <tr>
+                <td>ImageUrl</td>
+                <td><img ng-src="{{person.avatar_url}}" style="height: 80px; width: 80px;" title="{{person.name}} ({{person.company}})"></td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="search" ng-model="txtFilter">
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Stars</th>
+            <th>Language</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="repo in repos | orderBy:'-stargazers_count' | filter:txtFilter">
+                <td>{{repo.name}}</td>
+                <td style="text-align: right;">{{repo.stargazers_count | number}}</td>
+                <td>{{repo.language}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
